@@ -4,7 +4,7 @@ metadata:
   name: backend
 spec:
   revisionHistoryLimit: 0
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: backend
@@ -17,8 +17,8 @@ spec:
         - name: main
           image: ghcr.io/ondrejsika/counter
           env:
-            - name: BACKEND
-              value: inmemory
+            - name: REDIS
+              value: redis
           ports:
             - containerPort: 8000
           resources:
