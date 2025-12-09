@@ -13,6 +13,15 @@ spec:
       labels:
         app: frontend
     spec:
+      initContainers:
+        - name: wait-for-backend
+          image: ghcr.io/sikalabs/slu:v0.95.2
+          command:
+            - slu
+            - wait-for
+            - http200
+            - --url
+            - http://backend/readyz
       containers:
         - name: main
           image: ghcr.io/ondrejsika/counter-frontend

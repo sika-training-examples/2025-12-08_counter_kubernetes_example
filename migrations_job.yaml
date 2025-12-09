@@ -6,6 +6,15 @@ spec:
   template:
     spec:
       restartPolicy: OnFailure
+      initContainers:
+        - name: wait-for-redis
+          image: ghcr.io/sikalabs/slu:v0.95.2
+          command:
+            - slu
+            - wait-for
+            - tcp
+            - --address
+            - redis:6379
       containers:
         - name: main
           image: redis:8
