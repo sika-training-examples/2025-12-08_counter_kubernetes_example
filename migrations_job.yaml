@@ -21,4 +21,4 @@ spec:
           command:
             - /bin/sh
             - -c
-            - redis-cli -h redis INCRBY counter 10000
+            - redis-cli -h redis INCRBY counter 10000 && sleep 10 && echo Done.
