@@ -19,8 +19,23 @@ spec:
           env:
             - name: REDIS
               value: redis
+            - name: SLOW_START
+              value: '10'
+            - name: API_ONLY
+              value: '1'
           ports:
             - containerPort: 8000
+          startupProbe:
+            httpGet:
+              path: /readyz
+              port: 8000
+            periodSeconds: 2
+            failureThreshold: 20
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 8000
+            periodSeconds: 1
           resources:
             requests:
               cpu: 40m
